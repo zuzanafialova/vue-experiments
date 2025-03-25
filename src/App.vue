@@ -6,7 +6,9 @@ export default {
       title: 'Anna Karenina',
       author: 'Lev Nikolajevic Tolstoj',
       age: 82,
-    }
+      x: 0,
+      y: 0,
+    };
   },
   methods: {
     changeTitle(author) {
@@ -15,6 +17,16 @@ export default {
     },
     toggleShowBook() {
       this.showBooks = !this.showBooks;
+    },
+    handleEvent(e, data) {
+      console.log(e, e.type);
+      if (data) {
+        console.log(data);
+      }
+    },
+    handleMouseMove(e) {
+      this.x = e.offsetX;
+      this.y = e.offsetY;
     },
   },
 };
@@ -48,5 +60,42 @@ export default {
     <div v-show="showBooks">
       currently showing books
     </div>
+    <br>
+    <!--    mouse events-->
+    <div
+      class="box"
+      @mouseover="handleEvent($event, 5)"
+    >
+      mouse over
+    </div>
+    <div
+      class="box"
+      @mouseleave="handleEvent"
+    >
+      mouse leave
+    </div>
+    <div
+      class="box"
+      @dblclick="handleEvent"
+    >
+      double click
+    </div>
+    <div
+      class="box"
+      @mousemove="handleMouseMove"
+    >
+      position: {{ x }}, {{ y }}
+    </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.box {
+  padding: 100px 0;
+  width: 400px;
+  text-align: center;
+  background: #ddd;
+  margin: 20px;
+  display: inline-block;
+}
+</style>
