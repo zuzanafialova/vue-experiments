@@ -1,21 +1,20 @@
-<script>
+<script setup>
 import DialogComponent from '../common/DialogComponent.vue';
-export default {
-  components: {
-    DialogComponent,
+import { computed, toRefs } from 'vue';
+
+const props = defineProps({
+  books: {
+    type: Array,
+    required: true,
   },
-  props: {
-    books: {
-      type: Array,
-      required: true,
-    },
-  },
-  computed: {
-    filteredBooks() {
-      return this.books.filter((book) => book.isFav);
-    },
-  },
-};
+});
+
+const { books } = toRefs(props);
+
+const filteredBooks = computed(() => {
+  return books.value.filter((book) => book.isFav);
+});
+
 </script>
 
 <template>

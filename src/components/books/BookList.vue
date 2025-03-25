@@ -1,22 +1,21 @@
-<script>
-export default {
-  props: {
-    books: {
-      type: Array,
-      required: true,
-    },
-    showBooks: {
-      type: Boolean,
-      required: true,
-    },
+<script setup>
+import { toRefs } from 'vue';
+
+const emit = defineEmits([ 'toggle-fav' ]);
+
+const props = defineProps({
+  books: {
+    type: Array,
+    required: true,
   },
-  emits: [ 'toggle-fav' ],
-  data() {
-    return {
-      url: 'http://zuzanafialova.cz',
-    };
+  showBooks: {
+    type: Boolean,
+    required: true,
   },
-};
+});
+
+const { books, showBooks } = toRefs(props);
+
 </script>
 
 <template>
@@ -27,7 +26,7 @@ export default {
           v-for="(book,i) in books"
           :key="i"
           :class="{ fav: book.isFav}"
-          @click="$emit('toggle-fav', book)"
+          @click="emit('toggle-fav', book)"
         >
           <img
             :src="book.img"

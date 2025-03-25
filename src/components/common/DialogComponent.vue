@@ -1,38 +1,37 @@
-<script>
-export default {
-  props: {
-    modelValue: {
-      type: Boolean,
-      required: false,
-      default: () => false,
-    },
-    theme: {
-      type: String,
-      required: false,
-      default: () => 'sale',
-    },
+<script setup>
+
+import { ref, toRefs, watch } from 'vue';
+
+
+const modelValue = defineModel({
+  type: Boolean,
+  default: false,
+});
+
+const dialog = ref(modelValue.value);
+
+const props = defineProps({
+  theme: {
+    type: String,
+    required: false,
+    default: 'sale',
   },
-  emits: [ 'update:modelValue' ],
-  data() {
-    return {
-      dialog: false,
-    };
-  },
-  watch: {
-    modelValue(v) {
-      this.dialog = v;
-    },
-  },
-  methods: {
-    closeDialog() {
-      this.dialog = false;
-      this.$emit('update:modelValue', this.dialog);
-    },
-    toggle() {
-      this.dialog = !this.dialog;
-      this.$emit('update:modelValue', this.dialog);
-    },
-  },
+});
+
+const { theme } = toRefs(props);
+
+watch(modelValue, (v) => {
+  dialog.value = v;
+});
+
+const closeDialog = () => {
+  dialog.value = false;
+  modelValue.value = false;
+};
+
+const toggle = () => {
+  dialog.value = !dialog.value;
+  modelValue.value = dialog.value;
 };
 </script>
 

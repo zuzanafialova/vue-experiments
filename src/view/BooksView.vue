@@ -1,45 +1,40 @@
-<script>
+<script setup>
 import BookList from '../components/books/BookList.vue';
 import WelcomeSignDialog from '../components/books/WelcomeSignDialog.vue';
 import FavBooksDialog from '../components/books/FavBooksDialog.vue';
-export default {
-  components: {
-    FavBooksDialog,
-    WelcomeSignDialog,
-    BookList,
+
+import { ref } from 'vue';
+
+const showBooks = ref(true);
+const books = ref([
+  {
+    title: 'Lord of the Rings: The Fellowship of the ring',
+    author: 'J. R. R. Tolkien',
+    img: 'src/assets/img/circle-outline.svg',
+    isFav: true,
   },
-  data() {
-    return {
-      title: 'Modal app',
-      showModal: false,
-      showFavourite: false,
-      showBooks: true,
-      testDialog: false,
-      books: [
-        { title: 'Lord of the Rings: The Fellowship of the ring',
-          author: 'J. R. R. Tolkien',
-          img: 'src/assets/img/circle-outline.svg',
-          isFav: true },
-        { title: 'Harry Potter and the philosopher\'s stone',
-          author: 'J. K. Rowling',
-          img: 'src/assets/img/lightning-bolt-outline.svg',
-          isFav: true },
-        { title: 'Bible',
-          author: 'hromada divných týpků',
-          img: 'src/assets/img/pentagram.svg',
-          isFav: false  },
-      ],
-    };
+  {
+    title: 'Harry Potter and the philosopher\'s stone',
+    author: 'J. K. Rowling',
+    img: 'src/assets/img/lightning-bolt-outline.svg',
+    isFav: true,
   },
-  methods: {
-    toggleShowBook() {
-      this.showBooks = !this.showBooks;
-    },
-    toggleIsFav(book) {
-      book.isFav = !book.isFav;
-    },
+  {
+    title: 'Bible',
+    author: 'hromada divných týpků',
+    img: 'src/assets/img/pentagram.svg',
+    isFav: false,
   },
+]);
+
+const toggleShowBook = () => {
+  showBooks.value = !showBooks.value;
 };
+
+const toggleIsFav = (book) => {
+  book.isFav = !book.isFav;
+};
+
 </script>
 
 <template>

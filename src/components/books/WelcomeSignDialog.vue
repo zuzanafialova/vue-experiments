@@ -1,17 +1,11 @@
-<script>
+<script setup>
 import DialogComponent from '../common/DialogComponent.vue';
-export default {
-  components: {
-    DialogComponent,
-  },
-  data() {
-    return {
-      felcomeDialog: true,
-      header: 'Welcome to the dark side!',
-      text: 'Lorem ipsum dolor sit amet.',
-    };
-  },
-};
+import { ref } from 'vue';
+
+const felcomeDialog = ref(true);
+const header = 'Welcome to the dark side!';
+const text = 'Lorem ipsum dolor sit amet.';
+
 </script>
 
 <template>
