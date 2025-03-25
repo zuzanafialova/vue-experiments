@@ -1,90 +1,14 @@
 <script>
+import BooksView from './view/BooksView.vue';
 export default {
-  data() {
-    return {
-      url: 'http://zuzanafialova.cz',
-      showBooks: false,
-      books: [
-        { title: 'Lord of the Rings: The Fellowship of the ring',
-          author: 'J. R. R. Tolkien',
-          img: 'assets/img/circle-outline.svg',
-          isFav: true },
-        { title: 'Harry Potter and the philosopher\'s stone',
-          author: 'J. K. Rowling',
-          img: 'assets/img/lightning-bolt-outline.svg',
-          isFav: true },
-        { title: 'Bible',
-          author: 'hromada divných týpků',
-          img: 'assets/img/pentagram.svg',
-          isFav: false  },
-      ],
-    };
-  },
-  computed: {
-    filteredBooks() {
-      return this.books.filter((book) => book.isFav);
-    },
-  },
-
-  methods: {
-    toggleShowBook() {
-      this.showBooks = !this.showBooks;
-    },
-    toggleIsFav(book) {
-      book.isFav = !book.isFav;
-    },
+  components: {
+    BooksView,
   },
 };
 </script>
 
 <template>
-  <div>
-    <button @click="toggleShowBook">
-      <span v-if="showBooks">Hide Books</span>
-      <span v-else>Show Books</span>
-    </button>
-    <div v-show="showBooks">
-      currently showing books
-    </div>
-    <!--    <a :href="url">The best website</a>-->
-    <div v-if="showBooks">
-      <ul>
-        <li
-          v-for="(book,i) in books"
-          :key="i"
-          :class="{ fav: book.isFav}"
-          @click="toggleIsFav(book)"
-        >
-          <img
-            :src="book.img"
-            :alt="book.title"
-            style="max-width: 4rem"
-          >
-          <h3>{{ book.title }}</h3>
-          <p>{{ book.author }}</p>
-        </li>
-      </ul>
-    </div>
-    <div v-if="showBooks">
-      <h2>Favourite books</h2>
-      <ul>
-        <li
-          v-for="(book,i) in filteredBooks"
-          :key="i"
-          :class="{ fav: book.isFav}"
-          @click="toggleIsFav(book)"
-        >
-          <img
-            :src="book.img"
-            :alt="book.title"
-            style="max-width: 4rem"
-          >
-          <h3>{{ book.title }}</h3>
-          <p>{{ book.author }}</p>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <BooksView />
 </template>
 
 <style lang="scss" scoped>
