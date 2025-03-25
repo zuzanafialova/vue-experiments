@@ -1,0 +1,30 @@
+body {
+  background: white;
+  max-width: 960px;
+  margin: 20px auto;
+}
+
+p, h3, ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  background: #eeeeee;
+  margin: 20px auto;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: solid transparent 1px;
+  cursor: pointer;
+
+  &.fav {
+  background: #B2FFFF;
+  border: solid black 1px;
+  box-shadow: 0 0 15px #aaaaaa;
+}
+}
+

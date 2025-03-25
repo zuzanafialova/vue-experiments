@@ -2,31 +2,36 @@
 export default {
   data() {
     return {
-      showBooks: true,
-      title: 'Anna Karenina',
-      author: 'Lev Nikolajevic Tolstoj',
-      age: 82,
-      x: 0,
-      y: 0,
+      url: 'http://zuzanafialova.cz',
+      showBooks: false,
+      books: [
+        { title: 'Lord of the Rings: The Fellowship of the ring',
+          author: 'J. R. R. Tolkien',
+          img: 'assets/img/circle-outline.svg',
+          isFav: true },
+        { title: 'Harry Potter and the philosopher\'s stone',
+          author: 'J. K. Rowling',
+          img: 'assets/img/lightning-bolt-outline.svg',
+          isFav: true },
+        { title: 'Bible',
+          author: 'hromada divných týpků',
+          img: 'assets/img/pentagram.svg',
+          isFav: false  },
+      ],
     };
   },
-  methods: {
-    changeTitle(author) {
-      this.title = 'War and Peace';
-      this.author = author;
+  computed: {
+    filteredBooks() {
+      return this.books.filter((book) => book.isFav);
     },
+  },
+
+  methods: {
     toggleShowBook() {
       this.showBooks = !this.showBooks;
     },
-    handleEvent(e, data) {
-      console.log(e, e.type);
-      if (data) {
-        console.log(data);
-      }
-    },
-    handleMouseMove(e) {
-      this.x = e.offsetX;
-      this.y = e.offsetY;
+    toggleIsFav(book) {
+      book.isFav = !book.isFav;
     },
   },
 };
@@ -34,25 +39,6 @@ export default {
 
 <template>
   <div>
-    <div v-if="showBooks">
-      <p>{{ title }} - {{ author }} - {{ age }}</p>
-    </div>
-
-    <button @click="age++">
-      Increase age
-    </button>
-    <br>
-    <br>
-    <button @click="age--">
-      Decrease age
-    </button>
-    <br>
-    <br>
-    <button @click="changeTitle('autorem je taky Lev')">
-      Change book
-    </button>
-    <br>
-    <br>
     <button @click="toggleShowBook">
       <span v-if="showBooks">Hide Books</span>
       <span v-else>Show Books</span>
@@ -60,42 +46,46 @@ export default {
     <div v-show="showBooks">
       currently showing books
     </div>
-    <br>
-    <!--    mouse events-->
-    <div
-      class="box"
-      @mouseover="handleEvent($event, 5)"
-    >
-      mouse over
+    <!--    <a :href="url">The best website</a>-->
+    <div v-if="showBooks">
+      <ul>
+        <li
+          v-for="(book,i) in books"
+          :key="i"
+          :class="{ fav: book.isFav}"
+          @click="toggleIsFav(book)"
+        >
+          <img
+            :src="book.img"
+            :alt="book.title"
+            style="max-width: 4rem"
+          >
+          <h3>{{ book.title }}</h3>
+          <p>{{ book.author }}</p>
+        </li>
+      </ul>
     </div>
-    <div
-      class="box"
-      @mouseleave="handleEvent"
-    >
-      mouse leave
-    </div>
-    <div
-      class="box"
-      @dblclick="handleEvent"
-    >
-      double click
-    </div>
-    <div
-      class="box"
-      @mousemove="handleMouseMove"
-    >
-      position: {{ x }}, {{ y }}
+    <div v-if="showBooks">
+      <h2>Favourite books</h2>
+      <ul>
+        <li
+          v-for="(book,i) in filteredBooks"
+          :key="i"
+          :class="{ fav: book.isFav}"
+          @click="toggleIsFav(book)"
+        >
+          <img
+            :src="book.img"
+            :alt="book.title"
+            style="max-width: 4rem"
+          >
+          <h3>{{ book.title }}</h3>
+          <p>{{ book.author }}</p>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.box {
-  padding: 100px 0;
-  width: 400px;
-  text-align: center;
-  background: #ddd;
-  margin: 20px;
-  display: inline-block;
-}
 </style>
