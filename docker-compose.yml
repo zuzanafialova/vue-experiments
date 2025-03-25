@@ -1,0 +1,31 @@
+version: "3.4"
+
+services:
+
+    app:
+        container_name: app
+        restart: unless-stopped
+#        networks:
+#            mib:
+#                ipv4_address: 172.25.3.1
+        build:
+            context: .
+            target: dev
+            args:
+                USER_UID: ${USER_UID}
+                USER_GID: ${USER_GID}
+        user: "${USER_UID}:${USER_GID}"
+        volumes:
+            - .:/app:rw
+        environment:
+            VITE_ENV: ${VITE_ENV}
+        ports:
+            - 8080:8080
+
+
+#networks:
+#    mib:
+#        ipam:
+#            driver: default
+#            config:
+#                - subnet: "172.25.0.0/16"
