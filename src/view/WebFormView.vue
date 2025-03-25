@@ -1,5 +1,5 @@
 <script>
-import SignUpForm from '../components/SignUpForm.vue';
+import SignUpForm from '../components/webForm/SignUpForm.vue';
 export default {
   components: {
     SignUpForm,

@@ -4,6 +4,7 @@ import ReactionTimerView from './view/ReactionTimerView.vue';
 import WebFormView from './view/WebFormView.vue';
 
 
+// todo use router
 export default {
   components: {
     BooksView,
@@ -12,9 +13,9 @@ export default {
   },
   data() {
     return {
-      showBooksPage: false,
+      showBooksPage: true,
       showReactionPage: false,
-      showWebForm: true,
+      showWebForm: false,
     };
   },
 };

@@ -1,9 +1,11 @@
 <script>
-import AppearingBlock from '../components/AppearingBlock.vue';
-import BlockResults from '../components/BlockResults.vue';
+import AppearingBlock from '../components/reactionTimer/AppearingBlock.vue';
+import BlockResults from '../components/reactionTimer/BlockResults.vue';
 export default {
-  components: { AppearingBlock,
-    BlockResults },
+  components: {
+    AppearingBlock,
+    BlockResults,
+  },
   data() {
     return {
       isPlaying: false,
