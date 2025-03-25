@@ -13,7 +13,7 @@ export default {
       title: 'Modal app',
       header: 'Welcome to the dark side!',
       text: 'Lorem ipsum dolor sit amet.',
-      showModal: true,
+      showModal: false,
       showFavourite: false,
       showBooks: true,
       books: [
