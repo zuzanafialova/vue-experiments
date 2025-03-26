@@ -13,9 +13,9 @@ export default {
   },
   data() {
     return {
-      showBooksPage: true,
+      showBooksPage: false,
       showReactionPage: false,
-      showWebForm: false,
+      showWebForm: true,
     };
   },
 };
